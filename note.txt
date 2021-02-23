@@ -1,0 +1,11 @@
+1. Mysql 语法，基本和高级查询
+2. 设计模式常见
+3. 事务
+4. 锁和多线程
+5. redis
+6. springboot和springCloud
+7. 消息队列
+8. 树的遍历
+9. docker
+10. linux命令
+11. jenkins做持续集成
