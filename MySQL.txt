@@ -17,3 +17,32 @@
 		
 	组合索引：有“最左前缀”原则，即是从最左边开始组合，要有最左边的字段，否则查询不走该索引
         创建：CREATE INDEX 索引名 ON 表名(字段名(索引字段长度),字段名(索引字段长度))
+
+2.高级语法
+
+	使用查询语句创建表
+	CREATE TABLE staff_temp AS SELECT * FROM staff LIMIT 10;
+	从一个表中复制数据插入指定表
+	INSERT INTO staff_temp SELECT * FROM staff;
+	
+	子查询：
+		where处子查询
+		SELECT * FROM 表名 WHERE 字段 操作符 (SELECT 字段 FROM 表名)
+		注意：子查询必须是对一个字段进行查询
+		
+		from处子查询
+		SELECT * FROM (SELECT * FROM 表名) AS 别名
+		注意：子查询必须有别名
+		
+		select处子查询
+		SELECT 字段1, (SELECT 字段2 FROM 表名) FROM 表名
+		注意：子查询只能查一个字段，且只能返回一行数据
+		
+	合并：
+	   UNION
+	   SELECT * FROM 表名 UNION SELECT * FROM 表名
+	   注意：
+	   UNION 会去重
+	   UNION ALL 不会去重
+	   两个查询必须字段相同，或者列数相同，不可以直接加排序，可以作为子查询再排序
+	
