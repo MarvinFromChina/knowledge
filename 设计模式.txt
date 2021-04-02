@@ -23,3 +23,57 @@ https://blog.csdn.net/qq_27712229/article/details/88596744
 		3.准备抽象产品接口。
 		4.准备各个实现了抽象产品接口的产品类。
 		5.使用中根据需要，创建不同的工厂，工厂在生产对应种类的实例对象。
+        
+	抽象工厂模式：
+		抽象工厂模式有产品族概念，示例如下：
+		
+				产品族
+				海尔工厂  空调  冰箱
+				格力工厂  空调  冰箱
+				美的工厂  空调  冰箱
+		如果你的工厂要生产有关联关系的若干产品，可以用这个模式
+			
+		1. 准备工厂接口，接口包含生产一个产品族产品的方法
+		2. 准备产品接口和产品实现
+		3. 准备具体工厂类。
+		优点：抽象程度高，新增产品族方便。
+		缺点：增加或减少产品族的产品需要修改代码。
+		
+单例模式：一个全局使用的类对象，避免重复创建和销毁，减少开销。
+		示例，懒汉式
+			public class SingleInstance {
+				
+				private SingleInstance(){}
+    
+                private static SingleInstance instance;
+    
+                public static synchronized SingleInstance getInstance() {
+                  if (null == instance) {
+                     instance = new SingleInstance();
+                  }
+               return instance;
+           }
+				
+		或者使用枚举
+		public enum Color {
+
+			RED("红色", "001"), YELLOW("黄色", "002"), BLUE("蓝色", "003");
+
+			private String name;
+	
+			private String code;
+
+			Color(String name, String code) {  //枚举构造默认私有
+			this.name = name;
+			this.code = code;
+			}
+		}	
+		
+建造者模式: 分步构建对象
+		使用场景：一个对象属性较多，赋值比较复杂，并且属性的设置还有一定的依赖关系
+		图解：
+			产品   --->  建造者(builder)   --->  指挥者(director)
+			其中，建造者属性包含要构建的产品，并且提供属性赋值方法，为什么要在建造者内部去赋属性？因为可能逻辑较为复杂，放到pojo中不合适，影响以后故障排查。
+			指挥者 属性包含建造者，并且提获取实例的方法，此方法中保证属性赋值顺序，并且可以对属性做一些检查。
+			指挥者存在的意义，使调用者和建造者分离，避免调用者直接使用建造者来构建对象，因为调用者不一定对属性赋值顺序了解，也可能不知道哪些属性改如何处理。
+			后面出现逻辑变动，也不用修改调用者的代码，保证最小的修改范围，实现松耦合，有利于代码的稳定和可维护性。
