@@ -12,4 +12,4 @@
 9. docker
 10. linux命令
 11. jenkins做持续集成
-12. D
+12. 分布式事务，https://blog.csdn.net/DarzenWong/article/details/122432907
